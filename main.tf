@@ -112,44 +112,44 @@ resource "aws_security_group" "tf-sec-gr" {
   }
 }
 
-resource "null_resource" "config" {
-  depends_on = [aws_instance.control_node]
-  connection {
-    host = aws_instance.control_node.public_ip
-    type = "ssh"
-    user = "ec2-user"
-    private_key = file("/var/lib/jenkins/workspace/terraform/${var.mykey}.pem")
-    # Do not forget to define your key file path correctly!
-  }
+# resource "null_resource" "config" {
+#   depends_on = [aws_instance.control_node]
+#   connection {
+#     host = aws_instance.control_node.public_ip
+#     type = "ssh"
+#     user = "ec2-user"
+#     private_key = file("/var/lib/jenkins/workspace/terraform/${var.mykey}.pem")
+#     # Do not forget to define your key file path correctly!
+#   }
 
-  provisioner "file" {
-    source = "./ansible.cfg"
-    destination = "/home/ec2-user/.ansible.cfg"
-  }
+#   provisioner "file" {
+#     source = "./ansible.cfg"
+#     destination = "/home/ec2-user/.ansible.cfg"
+#   }
 
-  provisioner "file" {
-    source = "./inventory_aws_ec2.yml"
-    destination = "/home/ec2-user/inventory_aws_ec2.yml"
-  }
+#   provisioner "file" {
+#     source = "./inventory_aws_ec2.yml"
+#     destination = "/home/ec2-user/inventory_aws_ec2.yml"
+#   }
 
-  provisioner "file" {
-    # Do not forget to define your key file path correctly!
-    source = "/var/lib/jenkins/workspace/terraform/${var.mykey}.pem"
-    destination = "/home/ec2-user/${var.mykey}.pem"
-  }
+#   provisioner "file" {
+#     # Do not forget to define your key file path correctly!
+#     source = "/var/lib/jenkins/workspace/terraform/${var.mykey}.pem"
+#     destination = "/home/ec2-user/${var.mykey}.pem"
+#   }
 
-  provisioner "remote-exec" {
-    inline = [
-      "sudo hostnamectl set-hostname Control-Node",
-      "sudo yum install -y python3",
-      "sudo yum install -y python3-pip",
-      "pip3 install --user ansible",
-      "pip3 install --user boto3",
-      "chmod 400 ${var.mykey}.pem"
-    ]
-  }
+#   provisioner "remote-exec" {
+#     inline = [
+#       "sudo hostnamectl set-hostname Control-Node",
+#       "sudo yum install -y python3",
+#       "sudo yum install -y python3-pip",
+#       "pip3 install --user ansible",
+#       "pip3 install --user boto3",
+#       "chmod 400 ${var.mykey}.pem"
+#     ]
+#   }
 
-}
+# }
 
 output "controlnodeip" {
   value = aws_instance.control_node.public_ip
