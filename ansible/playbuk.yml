@@ -53,10 +53,10 @@
         state: started
         enabled: yes
 
-    # - name: copy files to the postgresql node
-    #   ansible.builtin.copy:
-    #     src: /home/ec2-user/ansible-project/postgres/
-    #     dest: /home/ec2-user/postgresql
+    - name: copy files to the postgresql node
+      ansible.builtin.copy:
+        src: /var/lib/jenkins/workspace/ansible-docker-install/
+        dest: /var/lib/jenkins/workspace/ansible-docker-install/
 
 # # Remove the container if it exists
 #     - name: remove cla_postgre container
