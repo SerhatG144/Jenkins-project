@@ -118,7 +118,7 @@ resource "null_resource" "config" {
     host = aws_instance.control_node.public_ip
     type = "ssh"
     user = "ec2-user"
-    private_key = file("~/${var.mykey}.pem")
+    private_key = file("/var/lib/jenkins/workspace/terraform/${var.mykey}.pem")
     # Do not forget to define your key file path correctly!
   }
 
