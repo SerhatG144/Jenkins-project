@@ -101,7 +101,7 @@
     #   debug:
     #     var: container_info
 
----
+
 
 - name: Install docker
   gather_facts: No
@@ -200,7 +200,7 @@
   #     debug:
   #       var: container_info
 
----
+
 
 - name: Install docker
   gather_facts: No
