@@ -18,17 +18,17 @@ provider "aws" {
   #  access_key = ""
 }
 
-resource "aws_instance" "control_node" {
-  ami = var.myami
-  instance_type = var.controlinstancetype
-  key_name = var.mykey
-  iam_instance_profile = aws_iam_instance_profile.ec2full.name
-  vpc_security_group_ids = [aws_security_group.tf-sec-gr.id]
-  tags = {
-    Name = "ansible_control"
-    stack = "ansible_project"
-  }
-}
+# resource "aws_instance" "control_node" {
+#   ami = var.myami
+#   instance_type = var.controlinstancetype
+#   key_name = var.mykey
+#   iam_instance_profile = aws_iam_instance_profile.ec2full.name
+#   vpc_security_group_ids = [aws_security_group.tf-sec-gr.id]
+#   tags = {
+#     Name = "ansible_control"
+#     stack = "ansible_project"
+#   }
+# }
 
 resource "aws_instance" "nodes" {
   ami = var.myami
