@@ -3,8 +3,8 @@
   any_errors_fatal: true
   hosts: _ansible_postgresql
   become: true
-  vars_files:
-    - secret.yml
+  vars:
+    - password: Pp123456789
   tasks:
     - name: upgrade all packages
       ansible.builtin.yum: 
