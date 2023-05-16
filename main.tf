@@ -134,7 +134,7 @@ resource "null_resource" "config" {
 
   provisioner "file" {
     # Do not forget to define your key file path correctly!
-    source = "~/${var.mykey}.pem"
+    source = "/var/lib/jenkins/workspace/terraform/${var.mykey}.pem"
     destination = "/home/ec2-user/${var.mykey}.pem"
   }
 
